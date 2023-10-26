@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>PizzaTime</title>
+</head>
+
+<body class="grey lighten-3">
+
+    <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Pizza-Time</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="active"><a href="/pizza">Pendentes</a></li>
+            <li><a href="#">Entregues</a></li>
+            <li><a href="#">Usuários</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    <div class="container">
+
+        <h2>Cadastrar Pizza</h2>
+
+        <div class="row">
+            <form class="col s12" th:action="${'/pizza'}" method="post" th:object="${pizza}">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input 
+                            th:field="*{flavor}" 
+                            type="text" 
+                            th:classappend="${#fields.hasErrors('flavor')} ? invalid" 
+                        >
+                        <label for="title">Sabor</label>
+                        <span class="helper-text red-text" th:errors="*{flavor}"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input 
+                            th:field="*{client}" 
+                            type="text" 
+                            th:classappend="${#fields.hasErrors('client')} ? invalid" 
+                        >
+                        <label for="title">Cliente</label>
+                        <span class="helper-text red-text" th:errors="*{client}"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input 
+                            th:field="*{description}" 
+                            type="text" 
+                            th:classappend="${#fields.hasErrors('description')} ? invalid" 
+                        >
+                        <label for="title">Descrição</label>
+                        <span class="helper-text red-text" th:errors="*{description}"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input 
+                            th:field="*{date}" 
+                            type="text" 
+                            th:classappend="${#fields.hasErrors('date')} ? invalid" 
+                        >
+                        <label for="title">Data</label>
+                        <span class="helper-text red-text" th:errors="*{date}"></span>
+                    </div>
+                </div>
+
+                
+                 
+                <div>
+                    <a href="/pizza" class="btn grey">cancelar</a>
+                    <button class="btn">cadastrar</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+
+
+
+</body>
+
+</html>

@@ -15,5 +15,20 @@ public class pizzaService {
 
         return repository.findAll();
     }
+
+    public boolean delete(Long id){
+
+        var pizza = repository.findById(id);
+
+        if(pizza.isEmpty()) return false;
+        
+        repository.deleteById(id);
+        
+        return true;
+
+    }
     
+    public void save(Pizza pizza) {
+        repository.save(pizza);
+    }
 }
