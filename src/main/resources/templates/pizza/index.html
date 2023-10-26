@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Pizza-Time</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="active"><a href="/pizza">Pendentes</a></li>
+            <li><a href="#">Entregues</a></li>
+            <li><a href="#">Usúarios</a></li>
+          </ul>
+        </div>
+      </nav>
+    
+    <div class="container">
+        <h2>Pizzas Pendentes</h2>
+
+        <div class="row">
+            <div class="col s12 m6" th:each="pizza : ${pizzaList}" >
+                <div class="card">
+                    <div class="card-image">
+                        <img src="../../assets/pizza.jpg" class="responsive-img">
+                        <span class="card-title" th:text="${pizza.flavor}"></span>
+                    </div>
+                    <div class="card-content">
+                        <div class="progress">
+                            <div class="determinate" th:style="${'width:' + pizza.status + '%'}"></div>
+                        </div>
+                    <span class="card-title" th:text="${'Cliente: ' + pizza.client}"></span>
+                        <p th:text="${pizza.description}">
+                         
+                        </p>
+                        <span class="badge blue white-text" th:text="${pizza.date}"></span>
+                    </div>
+
+                    <div class="card-action">
+                        <a  class="btn red">
+                            <i class="material-icons">delete</i>
+                        </a>
+                        <a  class="btn" title="subtrair status">
+                            <i class="material-icons">remove</i>
+                        </a>
+                        <a class="btn"title="somar status">
+                            <i class="material-icons">add</i>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <ul>
+            <li th:each="pizza : ${pizzaList}" th:text="${pizza}"></li>
+        </ul>
+    
+        <p th:text="${pizzaList}"></p>
+    </div>
+
+   
+</body>
+</html>
