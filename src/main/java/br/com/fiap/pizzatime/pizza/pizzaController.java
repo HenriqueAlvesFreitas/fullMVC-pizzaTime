@@ -3,6 +3,10 @@ package br.com.fiap.pizzatime.pizza;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,9 +24,14 @@ public class pizzaController {
 
     @Autowired
     pizzaService service;
+
+    @Autowired
+    MessageSource messageSource;
     
     @GetMapping
-    public String index(Model model){
+    public String index(Model model, @AuthenticationPrincipal OAuth2User user ){
+        model.addAttribute("username", user.getAttribute("name"));
+        model.addAttribute("avatar_url", user.getAttribute("avatar_url"));
         model.addAttribute("pizzaList", service.FindAll());
         return "pizza/index";
     }
@@ -31,7 +40,7 @@ public class pizzaController {
     public String delete(@PathVariable Long id, RedirectAttributes redirect){
 
         if(service.delete(id)){
-            redirect.addFlashAttribute("success", "Pizza Apagada com sucesso!");
+            redirect.addFlashAttribute("success", messageSource.getMessage("task.delete.success", null, LocaleContextHolder.getLocale()));
         }
         else{
             redirect.addFlashAttribute("error", "Pizza não foi Apagada.");

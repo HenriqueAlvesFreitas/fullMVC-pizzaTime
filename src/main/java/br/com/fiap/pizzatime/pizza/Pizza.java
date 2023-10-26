@@ -17,13 +17,13 @@ public class Pizza {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY )
     private long id;
 
-    @NotBlank(message = "O campo sabor é obrigatório")
+    @NotBlank(message = "{pizza.flavor.blank}")
     private String flavor;
     
     @NotBlank(message= "O campo cliente é obrigatório")
     private String client;
 
-    @Size(min = 10, message = "A descrição não pode ter menos de 10 caracteres")
+    @Size(min = 10, message = "{pizza.description.size}")
     private String description;
 
     @NotBlank(message = "O campo data, é obrigatório")

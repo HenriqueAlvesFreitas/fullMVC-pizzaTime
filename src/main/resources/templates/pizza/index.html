@@ -11,6 +11,7 @@
 
     <!-- Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
@@ -21,12 +22,30 @@
             <li class="active"><a href="/pizza">Pendentes</a></li>
             <li><a href="#">Entregues</a></li>
             <li><a href="#">Usuários</a></li>
+            <li>
+                <!-- Dropdown Trigger -->
+                <a class='dropdown-trigger' href='#' data-target='dropdown1'>
+                    <img th:src="${avatar_url}" alt="avatar do usuário logado" class="avatar">
+                </a>
+
+                <!-- Dropdown Structure -->
+                <ul id='dropdown1' class='dropdown-content'>
+                    <li><span th:text="${username}"></span></li>
+                    <li class="divider" tabindex="-1"></li>
+                    <li>
+                        <a href="/logout">
+                            <i class="material-icons">logout</i>
+                            sair
+                        </a>
+                    </li>
+                </ul>
+            </li>
           </ul>
         </div>
       </nav>
     
     <div class="container">
-        <h2>Pizzas Pendentes</h2>
+        <h2 th:text="#{pizza.pending}"></h2>
 
         <div class="card-panel teal accent-3" th:if="${success}" th:text="${success}"></div>
         <div class="card-panel red darken-1 white-text" th:if="${error}" th:text="${error}"></div>
@@ -74,4 +93,17 @@
 
    
 </body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+          var elems = document.querySelectorAll('.dropdown-trigger');
+          const options = {
+              constrainWidth: false,
+              coverTrigger: false
+          }
+          var instances = M.Dropdown.init(elems, options);
+      });
+
+</script>
+
 </html>
