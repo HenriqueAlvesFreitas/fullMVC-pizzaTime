@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt BR" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head(subtitle)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{~/style.css}">
+    <script th:src="@{~/script.js}"></script>
+    <title th:text="${'PizzaTime - ' + subtitle}"></title>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo">Pizza-Time</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="active"><a href="/pizza">Pendentes</a></li>
+            
+            <li><a href="#">Entregues</a></li>
+
+            <li><a href="#">Usuários</a></li>
+
+            <li class="avatar-wrapper">
+                <a class='dropdown-trigger' href='#' data-target='dropdown1'>
+                    <img th:src="${avatar_url}" alt="avatar do usuário logado" class="avatar">
+                </a>
+
+                <ul id='dropdown1' class='dropdown-content menu'>
+                    <li><span th:text="${username}"></span></li>
+
+                    <li class="divider" tabindex="-1"></li>
+
+                    <li>
+                        <a href="/logout">
+                            <i class="material-icons">logout</i>
+                            sair
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+</body>
+
+</html>

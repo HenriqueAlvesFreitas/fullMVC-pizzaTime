@@ -49,7 +49,9 @@ public class pizzaController {
     }
 
     @GetMapping("new")
-    public String form(Pizza pizza){
+    public String form(Pizza pizza, Model model, @AuthenticationPrincipal OAuth2User user){
+        model.addAttribute("username", user.getAttribute("name"));
+        model.addAttribute("avatar_url", user.getAttribute("avatar_url"));
         return "pizza/form";
     }
 
@@ -61,6 +63,34 @@ public class pizzaController {
         service.save(pizza);
 
         redirect.addFlashAttribute("success", "Pizza cadastrada com sucesso!");
+
+        return "redirect:/pizza";
+    }
+
+    @GetMapping("/dec/{id}")
+    public String decrement(@PathVariable Long id){
+        service.decrement(id);
+        return "redirect:/pizza";
+    }
+
+    @GetMapping("/inc/{id}")
+    public String increment(@PathVariable Long id){
+        service.increment(id);
+        return "redirect:/pizza";
+    }
+
+    @GetMapping("/recive/{id}")
+    public String recivePizza(@PathVariable Long id, @AuthenticationPrincipal OAuth2User user){
+
+        service.recivePizza(id, user);
+        
+        return "redirect:/pizza";
+    }
+
+    @GetMapping("/drop/{id}")
+    public String dropPizza(@PathVariable Long id, @AuthenticationPrincipal OAuth2User user){
+
+        service.dropPizza(id, user);
 
         return "redirect:/pizza";
     }
